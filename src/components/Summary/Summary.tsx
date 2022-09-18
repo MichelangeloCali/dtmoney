@@ -23,7 +23,7 @@ export const Summary = () => {
       </div>
       <div className='highligh-background'>
         <header>
-          <p>Entradas</p>
+          <p>Total</p>
           <img src={totalImg} alt="Total" />
         </header>
         <strong>R$500,00</strong>
