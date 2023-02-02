@@ -1,19 +1,21 @@
+import { FormEvent, useState } from 'react'
 import Modal from 'react-modal'
 
+import { api } from '../../services/api'
+import { Container, TransactionTypeContainer, RadioBox } from './styles'
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
 import closeImg from '../../assets/close.svg'
-
-import { Container, TransactionTypeContainer, RadioBox } from './styles'
-import { FormEvent, useState } from 'react'
-import { api } from '../../services/api'
 
 interface NewTransactionModalProps {
   isOpen: boolean
   onRequestClose: () => void
 }
 
-export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionModalProps) => {
+export const NewTransactionModal = ({
+  isOpen,
+  onRequestClose,
+}: NewTransactionModalProps) => {
   const [title, setTitle] = useState('')
   const [value, setValue] = useState(0)
   const [category, setCategory] = useState('')
@@ -26,20 +28,20 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
       value,
       category,
       typeTransaction,
-    };
+    }
 
     api.post('/transactions', data)
-  } 
+  }
 
   return (
-    <Modal 
-    isOpen={isOpen}
-    onRequestClose={onRequestClose}
-    overlayClassName="react-modal-overlay"
-    className="react-modal-content"
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      overlayClassName="react-modal-overlay"
+      className="react-modal-content"
     >
-      <button 
-        type='button'
+      <button
+        type="button"
         onClick={onRequestClose}
         className="react-modal-close"
       >
@@ -49,13 +51,13 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
       <Container onSubmit={handleCreateNewTransaction}>
         <h2>Cadastrar Transação</h2>
 
-        <input 
-          placeholder="Titulo" 
+        <input
+          placeholder="Titulo"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <input 
+        <input
           placeholder="Valor"
           type="number"
           value={value}
@@ -64,8 +66,10 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
 
         <TransactionTypeContainer>
           <RadioBox
-            type='button'
-            onClick={() => { setTypeTransaction('deposit') }}
+            type="button"
+            onClick={() => {
+              setTypeTransaction('deposit')
+            }}
             isActive={typeTransaction === 'deposit'}
             activeColor="green"
           >
@@ -74,27 +78,26 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
           </RadioBox>
 
           <RadioBox
-            type='button'
-            onClick={() => { setTypeTransaction('withdraw') }}
+            type="button"
+            onClick={() => {
+              setTypeTransaction('withdraw')
+            }}
             isActive={typeTransaction === 'withdraw'}
             activeColor="red"
           >
-            <img src={outcomeImg} alt="Saída"/>
+            <img src={outcomeImg} alt="Saída" />
             <span>Saída</span>
           </RadioBox>
         </TransactionTypeContainer>
 
-        <input 
-          placeholder="Categoria" 
+        <input
+          placeholder="Categoria"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         />
 
-        <button type="submit">
-          Cadastrar
-        </button>
-
+        <button type="submit">Cadastrar</button>
       </Container>
-  </Modal>
+    </Modal>
   )
 }
