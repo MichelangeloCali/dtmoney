@@ -1,11 +1,11 @@
+import { Container, Content } from './Header.styles'
 import logoimg from '../../assets/logo.svg'
-import { Container, Content } from './styles'
 
 interface HeaderProps {
-  onOpenNewTransactionModal : () => void
+  onOpenNewTransactionModal: () => void
 }
 
-export const Header = ({onOpenNewTransactionModal}: HeaderProps) => {
+export const Header = ({ onOpenNewTransactionModal }: HeaderProps) => {
   return (
     <div>
       <Container>

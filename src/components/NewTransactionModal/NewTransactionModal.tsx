@@ -2,7 +2,11 @@ import { FormEvent, useState } from 'react'
 import Modal from 'react-modal'
 
 import { api } from '../../services/api'
-import { Container, TransactionTypeContainer, RadioBox } from './styles'
+import {
+  Container,
+  TransactionTypeContainer,
+  RadioBox,
+} from './NewTransactionModal.styles'
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
 import closeImg from '../../assets/close.svg'

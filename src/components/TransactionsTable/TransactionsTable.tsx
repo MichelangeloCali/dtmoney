@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { api } from '../../services/api'
-import { Container } from './styles'
+import { Container } from './TransactionTable.styles'
 
 interface Transaction {
   id: number
