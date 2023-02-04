@@ -1,7 +1,7 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useState, useContext } from 'react'
 import Modal from 'react-modal'
 
-import { api } from '../../services/api'
+import { TransactionsContext } from '../../TransactionsContext'
 import {
   Container,
   TransactionTypeContainer,
@@ -20,21 +20,22 @@ export const NewTransactionModal = ({
   isOpen,
   onRequestClose,
 }: NewTransactionModalProps) => {
+  const { createTransaction } = useContext(TransactionsContext)
+
   const [title, setTitle] = useState('')
-  const [value, setValue] = useState(0)
+  const [amount, setAmount] = useState(0)
   const [category, setCategory] = useState('')
-  const [typeTransaction, setTypeTransaction] = useState('deposit')
+  const [type, setType] = useState('deposit')
 
   const handleCreateNewTransaction = (e: FormEvent) => {
     e.preventDefault()
-    const data = {
-      title,
-      value,
-      category,
-      typeTransaction,
-    }
 
-    api.post('/transactions', data)
+    createTransaction({
+      title,
+      amount,
+      category,
+      type,
+    })
   }
 
   return (
@@ -64,17 +65,17 @@ export const NewTransactionModal = ({
         <input
           placeholder="Valor"
           type="number"
-          value={value}
-          onChange={(e) => setValue(+e.target.value)}
+          value={amount}
+          onChange={(e) => setAmount(+e.target.value)}
         />
 
         <TransactionTypeContainer>
           <RadioBox
             type="button"
             onClick={() => {
-              setTypeTransaction('deposit')
+              setType('deposit')
             }}
-            isActive={typeTransaction === 'deposit'}
+            isActive={type === 'deposit'}
             activeColor="green"
           >
             <img src={incomeImg} alt="Entrada" />
@@ -84,9 +85,9 @@ export const NewTransactionModal = ({
           <RadioBox
             type="button"
             onClick={() => {
-              setTypeTransaction('withdraw')
+              setType('withdraw')
             }}
-            isActive={typeTransaction === 'withdraw'}
+            isActive={type === 'withdraw'}
             activeColor="red"
           >
             <img src={outcomeImg} alt="Saída" />
