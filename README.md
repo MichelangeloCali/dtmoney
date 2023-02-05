@@ -12,9 +12,13 @@ The app was developed to train some react concepts, such as Hooks, component tre
 # Tools used
 
 React (Hooks, ContextAPI)
+
 Typescript
+
 Styled Components
+
 Mirage JS (Fake API)
+
 Axios
 
 
